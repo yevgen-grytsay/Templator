@@ -1,0 +1,83 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+  <title>Templator</title>
+  <style type="text/css">
+	textarea.template {
+		width: 650px;
+		height: 290px;
+	}
+	textarea.data {
+		width: 945px;
+		height: 240px;
+	}
+  </style>
+</head>
+<body>
+	<h2>Шаблон:</h2>
+	<textarea class="template">
+<div class="container">
+	<p>{{shortbio}}</p>
+	<ul>
+	{{foreach albums as album}}
+		<li {{if album.selected == true}} class="selected"{{endif}}>
+			{{album.name}} ({{album.year}})
+		</li>
+	{{endforeach}}
+	</ul>
+
+	<select>
+	{{foreach albums as album}}
+		<option {{if album.selected == true}} selected{{endif}}>
+			{{album.name}} ({{album.year}})
+		</option>
+	{{endforeach}}
+	</select>
+</div>
+	</textarea>
+
+	<h2>Данные:</h2>
+	<textarea class="data">
+		var data = {
+		albums: [
+		{name: 'Golden Heart',			year: '1996'},
+		{name: 'A Night In London',		year: '1996'},
+		{name: 'Sailing to Philadelphia',	year: '2000'},
+		{name: 'The Ragpicker\'s Dream',	year: '2002'},
+		{name: 'Shangri-La',			year: '2004', selected: true},
+		{name: 'One Take Radio Sessions',	year: '2005'},
+		{name: 'Kill To Get Crimson',		year: '2007'},
+		{name: 'Get Lucky',			year: '2009'}
+		],
+
+		shortbio: 'Марк Фройдер Нопфлер OBE (англ. Mark Freuder Knopfler; 12 августа 1949, Глазго, Шотландия)' +
+		' — британский рок-музыкант, певец и композитор, один из сооснователей группы Dire Straits.'
+		};
+	</textarea>
+
+	<h2>Результат:</h2>
+	<script type="text/template" id="template_example">
+	    <div class="container">
+	        <p>{{shortbio}}</p>
+	        <ul>
+	        {{foreach albums as album}}
+	            <li {{if album.selected == true}} class="selected"{{endif}}>
+	                {{album.name}} ({{album.year}})
+	            </li>
+	        {{endforeach}}
+	        </ul>
+
+	        <select>
+	        {{foreach albums as album}}
+	            <option {{if album.selected == true}} selected{{endif}}>
+	                {{album.name}} ({{album.year}})
+	            </option>
+	        {{endforeach}}
+	        </select>
+	    </div>
+	</script>
+	<script src="../lib/templator.js" type="text/javascript"></script>
+	<script src="templator_example.js" type="text/javascript"></script>
+</body>
+</html>
